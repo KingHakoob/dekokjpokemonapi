@@ -1,0 +1,6 @@
+.pokedex {
+    background-image: url('../Assets/PokedexBG.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 715px;
+}
