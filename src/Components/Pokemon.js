@@ -22,12 +22,11 @@ export default function Pokemon() {
         setTypes(pokeData.types.map(type => type.type.name).join(', '));
         setAbilities(pokeData.abilities.map(abilities => abilities.ability.name).join(', '));
         setMoves(pokeData.moves);
-        await GetPokemonPic(name);
-        console.log(image);
+        await GetPokemonPic(pokeData.id);
     }
 
-    const GetPokemonPic = async (name) => {
-        setImage((await GetPokePic(name)).slice(5));
+    const GetPokemonPic = async (input) => {
+        setImage((await GetPokePic(input)));
     }
 
     useEffect(() => {
@@ -39,17 +38,27 @@ export default function Pokemon() {
             <Container>
                 <Row>
                     <Col>
-                        <img src={image} alt='Pokemon' />
+                        <Row>
+                            <Col>
+                                <input type="text" placeholder="Enter Pokemon Name Or Index Here" onChange={(e) => setSearch(e.target.value)} />
+                                <button onClick={() => GetPokemon(search)}>Press Me To Search</button>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <img src={image} alt='Pokemon' />
+                            </Col>
+                        </Row>
                     </Col>
                     <Col>
-                        <h1>Pokedex</h1>
-                        <input type="text" placeholder="Enter Pokemon Name Or Index Here" onChange={(e) => setSearch(e.target.value)} />
-                        <button onClick={() => GetPokemon(search)}>Press Me To Search</button>
-                        <h1>Name: {name}</h1>
-                        <h1>Index: {index}</h1>
-                        <h1>Type: {types}</h1>
-                        <h1>Abilities: {abilites}</h1>
-                        <Dropdown>
+                        {/* <h1>Pokedex</h1>
+                        <h1>Name: {name}</h1> */}
+                        <div className="d-flex justify-content-around pt-4">
+                            <h1 className="p-2">{index}</h1>
+                            <h1 className="pt-1">{types}</h1>
+                        </div>
+                        <h1 className="p-5">Abilities: {abilites}</h1>
+                        <Dropdown className="movesDropDown">
                             <Dropdown.Toggle variant="" id="dropdown-moves">
                                 Moves
                             </Dropdown.Toggle>
